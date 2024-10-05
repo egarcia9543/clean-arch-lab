@@ -7,7 +7,7 @@ import { CharacterMapped } from "../../core/models/mapped-characters";
 export class CharacterUsecase {
   characterGateway = inject(CharacterGateway);
 
-  getCharacters(): Observable<CharacterMapped> {
-    return this.characterGateway.getCharacters();
+  getCharacters(page: number = 1, limit: number = 10): Observable<CharacterMapped> {
+    return this.characterGateway.getCharacters(page, limit);
   };
 }

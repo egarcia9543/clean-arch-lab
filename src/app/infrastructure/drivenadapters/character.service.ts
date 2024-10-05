@@ -13,8 +13,8 @@ export class CharacterService {
 
   constructor(private http: HttpClient) { }
 
-  getCharacters(): Observable<CharacterMapped> {
-    return this.http.get<CharactersResponse>(environment.baseUrl).pipe(
+  getCharacters(page: number = 1, limit: number = 10): Observable<CharacterMapped> {
+    return this.http.get<CharactersResponse>(`${environment.baseUrl}?page=${page}&limit=${limit}`).pipe(
       map(response => characterMapper(response))
     );
   };
