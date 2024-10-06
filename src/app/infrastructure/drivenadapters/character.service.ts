@@ -14,7 +14,7 @@ export class CharacterService {
   constructor(private http: HttpClient) { }
 
   getCharacters(page: number = 1, limit: number = 10): Observable<CharacterMapped> {
-    return this.http.get<CharactersResponse>(`${environment.baseUrl}?page=${page}&limit=${limit}`).pipe(
+    return this.http.get<CharactersResponse>(`${environment.baseUrl}characters?page=${page}&limit=${limit}`).pipe(
       map(response => characterMapper(response))
     );
   };

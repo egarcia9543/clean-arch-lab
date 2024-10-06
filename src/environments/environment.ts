@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl : "https://dragonball-api.com/api/characters"
+  baseUrl : "https://dragonball-api.com/api/"
 }

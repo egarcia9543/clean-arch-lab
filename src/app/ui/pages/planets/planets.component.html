@@ -1,0 +1,23 @@
+<table mat-table [dataSource]="planetsTableData()">
+  <!-- <ng-container>
+    Add checkboxes
+  </ng-container> -->
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Code </th>
+    <td mat-cell *matCellDef="let element"> {{element.planetId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.planetName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="destroyed">
+    <th mat-header-cell *matHeaderCellDef> Destroyed </th>
+    <td mat-cell *matCellDef="let element"> {{element.isDestroyed}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
