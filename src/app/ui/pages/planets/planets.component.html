@@ -1,23 +1,40 @@
-<table mat-table [dataSource]="planetsTableData()">
-  <!-- <ng-container>
-    Add checkboxes
-  </ng-container> -->
+@if (isAllSelected() || rowsSelected.selected.length > 0) {
+  <div class="selected-rows" style="background-color: wheat;">
+    <span>{{rowsSelected.selected.length}} rows selected out of {{length()}} rows</span>
+    <br>
+    <button mat-raised-button color="warn">Delete Selected</button>
+  </div>
+  <button (click)="sendSelectedPlanets()">Enviar</button>
+}
+<mat-table mat-table [dataSource]="planetsTableData()">
+  <ng-container matColumnDef="selection">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle($event) : null" [checked]="isViewableSelected()">
+    </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? rowsSelected.toggle(element.planetId) : null"
+      [checked]="rowsSelected.isSelected(element.planetId)">
+    </mat-checkbox>
+    </mat-cell>
+  </ng-container>
 
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> Code </th>
-    <td mat-cell *matCellDef="let element"> {{element.planetId}} </td>
+    <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.planetId}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.planetName}} </td>
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.planetName}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="destroyed">
-    <th mat-header-cell *matHeaderCellDef> Destroyed </th>
-    <td mat-cell *matCellDef="let element"> {{element.isDestroyed}} </td>
+    <mat-header-cell *matHeaderCellDef> Destroyed </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.isDestroyed}} </mat-cell>
   </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [length]="length()" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]"
+  showFirstLastButtons></mat-paginator>

@@ -30,7 +30,7 @@ export class CharactersComponent implements OnInit {
   private _characterSrv = inject(CharacterUsecase);
 
   ngOnInit(): void {
-    this._characterSrv.getCharacters().subscribe(response => {
+    this._characterSrv.getCharacters(1, 10).subscribe(response => {
       this.characters.set(response.characters);
       this.currentPage.set(response.pagination.currentPage);
       this.totalPages.set(response.pagination.totalPages);
@@ -50,7 +50,7 @@ export class CharactersComponent implements OnInit {
   }
 
   private _loadCharacters(page: number): void {
-    this._characterSrv.getCharacters(page).subscribe(response => {
+    this._characterSrv.getCharacters(page, 10).subscribe(response => {
       this.characters.set(response.characters);
       this.currentPage.set(response.pagination.currentPage);
     });

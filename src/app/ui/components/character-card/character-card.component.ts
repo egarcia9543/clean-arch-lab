@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input, signal } from '@angular/core';
 import { Character } from '../../../core/models/mapped-characters';
 
 @Component({
@@ -9,5 +9,12 @@ import { Character } from '../../../core/models/mapped-characters';
   styleUrl: './character-card.component.scss'
 })
 export class CharacterCardComponent {
-  @Input() character!: Character;
+  character = input.required<Character>();
+  number = signal<number>(0);
+
+  constructor () {
+    setTimeout(() => {
+      this.number.update(_ => 1);
+    }, 2000)
+  }
 }

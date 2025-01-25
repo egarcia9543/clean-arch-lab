@@ -6,9 +6,7 @@ import { PlanetsResponse } from '../../core/models/planets';
 import { environment } from '../../../environments/environment';
 import { planetMapper } from '../mappers/planet-mapper';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PlanetService {
 
   constructor(private http: HttpClient) { }
